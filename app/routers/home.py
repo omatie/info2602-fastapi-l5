@@ -20,10 +20,17 @@ async def index(
         return RedirectResponse(url="/app", status_code=status.HTTP_303_SEE_OTHER)
     return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
 
+ # Implement task 3.5 here. Remove the line below that says "pass" once complete
+    #pass
 @home_router.get("/app", response_class=HTMLResponse)
 async def app_dashbaord(
     request: Request,
     user: AuthDep
 ):
-    # Implement task 3.5 here. Remove the line below that says "pass" once complete
-    pass
+    return templates.TemplateResponse(
+        request=request, 
+        name="todo.html",
+        context={
+            "current_user": user
+        }
+    )

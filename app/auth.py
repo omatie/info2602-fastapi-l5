@@ -53,7 +53,8 @@ async def get_current_user(request:Request, db:SessionDep)->User:
         user_role = payload.get("role", None)
         if user_id is None or user_role is None:
             raise credentials_exception
-    except InvalidTokenError:
+    except InvalidTokenError as e:
+        print(e)
         raise credentials_exception
     user = None
 
