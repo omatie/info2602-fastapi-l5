@@ -83,8 +83,14 @@ async def signup_page(request: Request):
 
 ##EXECISE: todo.html has a custom block called link that provides a logout link on the todos home page.
 ##        Implement a GET route to log the user out
+##         Find the cookie and delete it then redirect it to login page
 @auth_router.get("/logout", response_class=HTMLResponse)
 async def login_page(request: Request):
+    response = RedirectResponse(url="/login", status_code=303)
+    response.delete_cookie("access_token")
+    flash(request, "Cookie deleted, user logged out successfully!")
+
+    
     return templates.TemplateResponse(
         request=request, 
         name="login.html",
